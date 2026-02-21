@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+
+# Pytest
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Selenium / driver logs
+*.log
