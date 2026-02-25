@@ -1,5 +1,3 @@
-[![Tests](https://github.com/je80sand/selenium_automation_project/actions/workflows/test.yml/badge.svg)](https://github.com/je80sand/selenium_automation_project/actions/workflows/test.yml)
-
 # Selenium Automation Project
 
 ![Tests](https://github.com/je80sand/selenium_automation_project/actions/workflows/test.yml/badge.svg)
