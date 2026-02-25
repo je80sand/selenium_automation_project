@@ -145,3 +145,15 @@ This project demonstrates:
 
 Jose Sandoval  
 Python Automation | Selenium | QA Engineering
+
+## Professional Focus
+
+This repository reflects a production-ready automation framework built with:
+
+- Maintainability in mind (Page Object Model)
+- CI-first execution
+- Environment-aware configuration (local + headless)
+- Clean test isolation using Pytest fixtures
+
+The goal was not just to automate a login test,
+but to demonstrate real-world automation engineering principles.
