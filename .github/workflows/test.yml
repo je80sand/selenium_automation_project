@@ -1,16 +1,49 @@
-from src.pages.login_page import LoginPage
-from src.pages.secure_page import SecurePage
-from selenium.webdriver.common.by import By
+name: Tests
 
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-def test_logout(driver):
-    login_page = LoginPage(driver)
-    login_page.load()
-    login_page.login("tomsmith", "SuperSecretPassword!")
+jobs:
+  test:
+    runs-on: ubuntu-latest
 
-    secure_page = SecurePage(driver)
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    # Click logout button
-    driver.find_element(By.CSS_SELECTOR, "a.button.secondary.radius").click()
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-    assert "login" in driver.current_url
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-linux-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          google-chrome --version
+
+      - name: Run tests (headless) + generate HTML report
+        env:
+          HEADLESS: "1"
+        run: |
+          mkdir -p reports
+          pytest -q -s --html=reports/report.html --self-contained-html
+
+      - name: Upload HTML report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-html-report
+          path: reports/report.html
