@@ -2,11 +2,9 @@ name: Tests
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
   test:
@@ -21,27 +19,23 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest-html
-
       - name: Install Google Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Run tests (headless)
-        env:
-          HEADLESS: "1"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests (parallel + headless) + generate HTML report
         run: |
           mkdir -p reports
-          pytest -q -s --html=reports/report.html --self-contained-html
+          HEADLESS=1 pytest -n auto --dist loadfile -v --html=reports/report.html --self-contained-html
 
-      - name: Upload report
-        if: always()
+      - name: Upload HTML report artifact
         uses: actions/upload-artifact@v4
         with:
-          name: pytest-report
+          name: pytest-html-report
           path: reports/report.html
