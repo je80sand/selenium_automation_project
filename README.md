@@ -1,109 +1,209 @@
-# Selenium Automation Framework (Python + Pytest + POM)
+# Selenium Automation Framework  
+### By Jose Sandoval
 
-![CI](https://github.com/je80sand/selenium_automation_project/actions/workflows/test.yml/badge.svg)
-![Python](https://img.shields.io/badge/Python-3.12-blue)
-![Pytest](https://img.shields.io/badge/Pytest-Framework-brightgreen)
-![Selenium](https://img.shields.io/badge/Selenium-WebDriver-orange)
-![Parallel](https://img.shields.io/badge/Execution-Parallel-blueviolet)
+A scalable, production-style Selenium automation framework built with Python and Pytest.
 
-A production-style Selenium automation framework built using **Python, Pytest, and Page Object Model (POM)** architecture.
+This project demonstrates real-world automation engineering practices including:
 
-This project demonstrates real-world automation structure including:
-
-- Explicit waits for stability  
-- Assertion-heavy validation  
-- Access control testing  
-- Parallel test execution  
-- GitHub Actions CI integration  
-- HTML reporting artifacts  
+- Page Object Model (POM) architecture
+- Environment-based configuration (dev/prod)
+- Parallel test execution
+- Automatic test reruns
+- HTML reporting
+- GitHub Actions CI integration
+- Clean, modular project structure
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
-- Python 3.12  
-- Selenium WebDriver  
-- Pytest  
-- pytest-xdist (parallel execution)  
-- pytest-html (report generation)  
-- GitHub Actions (CI/CD)  
+- Python 3.12
+- Selenium
+- Pytest
+- pytest-xdist (parallel execution)
+- pytest-rerunfailures
+- pytest-html
+- GitHub Actions (CI/CD)
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 selenium_automation_project/
-├── src/
-│ └── pages/
-│ ├── login_page.py
-│ └── secure_page.py
-├── tests/
-│ ├── test_invalid_login.py
-│ ├── test_login_real_world.py
-│ ├── test_logout.py
-│ ├── test_access_control.py
-│ └── test_secure_area_assertions.py
+│
+├── .github/workflows/
+│ └── test.yml
+│
 ├── reports/
+│
+├── src/
+│ ├── config/
+│ │ ├── __init__.py
+│ │ └── settings.py
+│ │
+│ ├── pages/
+│ │ ├── __init__.py
+│ │ ├── login_page.py
+│ │ └── secure_area_page.py
+│ │
+│ └── utils/
+│ └── __init__.py
+│
+├── tests/
+│ ├── conftest.py
+│ ├── test_invalid_login.py
+│ ├── test_logout.py
+│ ├── test_login_real_world.py
+│ └── test_secure_area_assertions.py
+│
 ├── pytest.ini
+├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## ▶️ Run Tests Locally
+## Key Features
 
-Activate virtual environment:
+### Page Object Model (POM)
+All UI interactions are abstracted into reusable page classes for maintainability and scalability.
+
+### Environment Configuration
+Supports environment switching using `.env.dev` and `.env.prod`.
+
+Environment variables:
+- BASE_URL
+- HEADLESS
+- ENV
+
+### Parallel Execution
+Tests run in parallel using pytest-xdist:
 
 ```
-source venv/bin/activate
+pytest -n auto
 ```
 
-Run all tests:
+### Automatic Reruns
+Failed tests automatically rerun once to reduce flakiness.
 
+Configured in pytest.ini:
 ```
-pytest -v
-```
-
-Run in parallel:
-
-```
-pytest -n auto -v
+--reruns 1 --reruns-delay 2
 ```
 
-Generate local HTML report:
+### HTML Reporting
+Generates a professional HTML test report:
 
 ```
 pytest --html=reports/report.html --self-contained-html
 ```
 
----
+Report location:
+```
+/reports/report.html
+```
 
-## ✅ What Is Validated
+### Continuous Integration (CI)
 
-✔ Invalid login shows correct error message  
-✔ Valid login redirects to `/secure`  
-✔ Secure page header + flash message verified  
-✔ Logout redirects back to login page  
-✔ Direct access to `/secure` without login is blocked  
-✔ Logout confirmation message verified  
+GitHub Actions automatically:
 
----
+- Installs dependencies
+- Sets up Chrome
+- Runs full test suite
+- Fails build if tests fail
 
-## 🟢 Continuous Integration
-
-Every push to `main` automatically:
-
-- Installs dependencies  
-- Runs tests headless  
-- Runs tests in parallel  
-- Uploads HTML test report as artifact  
-
-View CI runs:  
-GitHub → Repository → Actions tab  
+CI runs on every push to main.
 
 ---
 
-## 📌 Resume Bullet
+## How To Run Locally
 
-Built a production-style Selenium automation framework using Python and Pytest with Page Object Model architecture, explicit waits, CI automation via GitHub Actions, parallel test execution, and HTML reporting artifacts.
+### Clone Repository
+
+```
+git clone https://github.com/je80sand/selenium_automation_project.git
+cd selenium_automation_project
+```
+
+### Create Virtual Environment
+
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+### Install Dependencies
+
+```
+pip install -r requirements.txt
+```
+
+### Run All Tests
+
+```
+pytest
+```
+
+### Run Tests in Parallel
+
+```
+pytest -n auto
+```
+
+### Run Smoke Tests Only
+
+```
+pytest -m smoke
+```
+
+---
+
+## Example Output
+
+```
+5 passed in 17.79s
+Generated html report: reports/report.html
+```
+
+---
+
+## Real-World Test Coverage Includes
+
+- Valid login flow
+- Invalid login handling
+- Logout validation
+- Secure area access verification
+- Assertion-heavy secure page validation
+
+---
+
+## Why This Project Matters
+
+This framework mirrors how real QA Automation / SDET teams structure test automation:
+
+- Modular architecture
+- Environment-based configuration
+- CI/CD integration
+- Parallelization for speed
+- Flakiness mitigation
+- Reporting for stakeholders
+
+It is designed to be production-ready, scalable, and extensible.
+
+---
+
+## Author
+
+Jose Sandoval  
+Python Automation Engineer (Aspiring)
+
+---
+
+## Future Enhancements
+
+- Dockerized test execution
+- Screenshot capture on failure
+- Logging framework integration
+- Test tagging strategy for pipelines
+- Artifact upload of HTML reports in CI
