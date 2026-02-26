@@ -1,4 +1,7 @@
-# Selenium Automation Framework  
+# Selenium Automation Framework
+![CI](https://github.com/je80sand/selenium_automation_project/actions/workflows/test.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+
 ### By Jose Sandoval
 
 A scalable, production-style Selenium automation framework built with Python and Pytest.
@@ -77,32 +80,39 @@ Environment variables:
 - HEADLESS
 - ENV
 
+---
+
 ### Parallel Execution
-Tests run in parallel using pytest-xdist:
 
 ```
 pytest -n auto
 ```
 
-### Automatic Reruns
-Failed tests automatically rerun once to reduce flakiness.
+---
 
-Configured in pytest.ini:
+### Automatic Reruns
+
+Configured in `pytest.ini`:
+
 ```
 --reruns 1 --reruns-delay 2
 ```
 
+---
+
 ### HTML Reporting
-Generates a professional HTML test report:
 
 ```
 pytest --html=reports/report.html --self-contained-html
 ```
 
 Report location:
+
 ```
 /reports/report.html
 ```
+
+---
 
 ### Continuous Integration (CI)
 
@@ -110,10 +120,10 @@ GitHub Actions automatically:
 
 - Installs dependencies
 - Sets up Chrome
-- Runs full test suite
-- Fails build if tests fail
+- Runs the full test suite
+- Fails the build if tests fail
 
-CI runs on every push to main.
+CI runs on every push to `main`.
 
 ---
 
@@ -180,7 +190,7 @@ Generated html report: reports/report.html
 
 ## Why This Project Matters
 
-This framework mirrors how real QA Automation / SDET teams structure test automation:
+This framework mirrors how modern QA Automation / SDET teams structure scalable test automation:
 
 - Modular architecture
 - Environment-based configuration
@@ -189,7 +199,7 @@ This framework mirrors how real QA Automation / SDET teams structure test automa
 - Flakiness mitigation
 - Reporting for stakeholders
 
-It is designed to be production-ready, scalable, and extensible.
+It is designed to be production-ready and extensible.
 
 ---
 
@@ -205,5 +215,4 @@ Python Automation Engineer (Aspiring)
 - Dockerized test execution
 - Screenshot capture on failure
 - Logging framework integration
-- Test tagging strategy for pipelines
 - Artifact upload of HTML reports in CI
