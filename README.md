@@ -1,6 +1,6 @@
 # Selenium Automation Framework (Python + Pytest + POM)
 
-![CI](https://github.com/je80sand/selenium_automation_project/actions/workflows/tests.yml/badge.svg)
+![CI](https://github.com/je80sand/selenium_automation_project/actions/workflows/test.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Pytest](https://img.shields.io/badge/Pytest-Framework-brightgreen)
 ![Selenium](https://img.shields.io/badge/Selenium-WebDriver-orange)
