@@ -2,19 +2,19 @@ name: Selenium Automation CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   tests:
     runs-on: ubuntu-latest
 
     env:
-      # These make CI run headless and avoid needing your .env files in GitHub
       ENV: prod
       BASE_URL: https://the-internet.herokuapp.com
       HEADLESS: "1"
+      PYTHONPATH: ${{ github.workspace }}
 
     steps:
       - name: Checkout
