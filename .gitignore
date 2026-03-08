@@ -20,3 +20,8 @@ venv/
 # Selenium / driver logs
 *.log
 reports/
+
+#Environment files
+.env
+.env.*
+!.env.example
